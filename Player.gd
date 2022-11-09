@@ -11,7 +11,7 @@ func _ready():
 	
 	
 func start(pos):
-	position = pos
+	position = get_parent().StartPosition
 	show()
 	$CollisionShape2D.disabled = false
 
