@@ -1,6 +1,5 @@
 extends Node2D
 
-#export(PackedScene) var enemy_scene
 var enemy_scene = preload("res://Enemy.tscn")
 var score
 

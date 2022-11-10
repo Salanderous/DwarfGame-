@@ -14,4 +14,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_pressed("left_click"):
-		pass
+		#print("Left Click")
+		var hit_things
+		hit_things = get_overlapping_bodies()
+		for thing in hit_things:
+			#print("Got overlapping body")
+			if thing.has_method("die"):
+				#print("Got enemy")
+				thing.die()
