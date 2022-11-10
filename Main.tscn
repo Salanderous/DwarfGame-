@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=3]
 
 [sub_resource type="Curve2D" id=1]
@@ -8,11 +9,11 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 1024, 600, 0, 0, 0, 0, 0, 600, 0, 0, 0, 0, 0, 0 )
 }
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-visible = false
+position = Vector2( 200, 74 )
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -22,6 +23,10 @@ wait_time = 0.5
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 80, 80 )
+texture = ExtResource( 2 )
 
 [node name="StartPosition" type="Position2D" parent="."]
 position = Vector2( 80, 80 )
