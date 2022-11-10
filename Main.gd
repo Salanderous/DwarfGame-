@@ -1,6 +1,7 @@
-extends Node
+extends Node2D
 
-export(PackedScene) var enemy_scene
+#export(PackedScene) var enemy_scene
+var enemy_scene = preload("res://Enemy.tscn")
 var score
 
 
@@ -38,9 +39,8 @@ func _on_MobTimer_timeout():
 	# Create a new instance of the Enemy scene.
 	#The enemy object will handle its own movement
 	var enemy = enemy_scene.instance()
-	
 	# Choose a spawn location
-	enemy.position = $TestEnemyPosition
+	enemy.position = $TestEnemyPosition.position
 	
 	# Spawn the mob by adding it to the Main scene.
 	add_child(enemy)
