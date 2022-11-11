@@ -41,3 +41,5 @@ shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+
+[connection signal="charge_weapon" from="." to="Weapon" method="_on_Player_charge_weapon"]
