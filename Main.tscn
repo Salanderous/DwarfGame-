@@ -43,4 +43,15 @@ curve = SubResource( 1 )
 scale = Vector2( 2, 2 )
 z_index = -1
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Weapon Charge" type="Label" parent="CanvasLayer/Control"]
+margin_right = 64.0
+margin_bottom = 32.0
+text = "TEST"
+
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
