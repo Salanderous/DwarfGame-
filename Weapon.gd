@@ -2,7 +2,9 @@ extends Area2D
 signal weapon_swing
 
 var weapon_charge = 0
+var physics_lock = false
 
+onready var WeaponCharge = get_node("/root/Main/HUD/Control/Weapon Charge")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,36 +13,33 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("left_click"):
-		scale = Vector2(weapon_charge, weapon_charge)
-		weapon_charge = 0
-		emit_signal("weapon_swing")
+	if (!physics_lock):
 		rotation = find_weapon_rotation()
+		scale = Vector2(weapon_charge, weapon_charge)
+	if Input.is_action_just_pressed("left_click") and physics_lock == false:
+		weapon_charge = 0
+		WeaponCharge.set_text(str(0))
+		emit_signal("weapon_swing")
 		#print("Left Click")
+		physics_lock = true
 		show()
-		var hit_things
-		hit_things = get_overlapping_bodies()
-		for thing in hit_things:
-			#print("Got overlapping body")
-			if thing.has_method("die"):
-				#print("Got enemy")
-				thing.die()
+		check_weapon_targets()
 		yield(get_tree().create_timer(1.0), "timeout")
 		hide()
-		
+		physics_lock = false
 
 func find_weapon_rotation():
 	var screenCenter = get_viewport_rect().size/2
 	var weaponVector = Vector2(get_viewport().get_mouse_position() - screenCenter)
-	#print("Mouse Position:")
-	#print(get_viewport().get_mouse_position())
-	#print("Screen Center:")
-	#print(screenCenter)
-	#print("Weapon Vector:")
-	#print(weaponVector.normalized())
 	return weaponVector.angle() + PI/2
 	
-
+func check_weapon_targets():
+	for thing in get_overlapping_bodies():
+		#print("Got overlapping body")
+		if thing.has_method("die"):
+			#print("Got enemy")
+			thing.die()
 
 func _on_Player_charge_weapon():
-	weapon_charge += .05
+	weapon_charge += .02
+	WeaponCharge.set_text(str(weapon_charge))
