@@ -3,9 +3,9 @@ signal hit
 
 class_name Enemy
 
-
-const SPEED = 25
-const KNOCKBACK = 20
+var spawning
+var SPEED = 25
+var KNOCKBACK = 25
 
 
 onready var Player = get_node("/root/Player")
@@ -13,10 +13,20 @@ onready var HealthBar = get_node("/root/Main/HUD/Control/HealthBar")
 
 
 func _ready():
+	#Different enemies wil override this to set their stats
+	setStats()
+	#First, play the spawn animation
+	spawning = true
+	$CollisionShape2D.disabled = true
+	$AnimatedSprite.hide()
+	$SpawnParticles.emitting = true
+	$SpawnParticles.show()
 	$AnimatedSprite.playing = true
-	var mob_types = $AnimatedSprite.frames.get_animation_names()
-	$AnimatedSprite.animation = mob_types[randi() % mob_types.size()]
-	show()
+	$AnimatedSprite.animation = get_class()
+	yield(get_tree().create_timer(3.0), "timeout")
+	$AnimatedSprite.show()
+	$CollisionShape2D.disabled = false
+	spawning = false
 	
 func die():
 	#print("Enemy died")
@@ -25,6 +35,11 @@ func die():
 
 
 func _process(delta):
+	#Don't do anything if still spawning
+	if (spawning):
+		return
+	#Different enemies will override this with their own projectiles
+	projectileAttack()
 	var collision = move_and_collide(findPlayerVector() * SPEED * delta)
 	if collision:
 		if collision.collider.name == "Player":
@@ -35,8 +50,10 @@ func _process(delta):
 	pass
 	
 func findPlayerVector():
-	return (get_node("/root/Player").position - position).normalized()
+	return (Player.position - position).normalized()
 
+func setStats():
+	pass
 
-#func _on_VisibilityNotifier2D_screen_exited():
-	#queue_free()
+func projectileAttack():
+	pass

@@ -1,6 +1,6 @@
 extends Node2D
 
-var enemy_scene = preload("res://Enemy.tscn")
+var enemy_list = [preload("res://ElfFighter.tscn"), preload("res://ElfMage.tscn")]
 var score
 var game_duration = 0
 var STAGE_HEIGHT = 500
@@ -43,7 +43,8 @@ func _on_MobTimer_timeout():
 		return
 	# Create a new instance of the Enemy scene.
 	#The enemy object will handle its own movement
-	var enemy = enemy_scene.instance()
+	enemy_list.shuffle()
+	var enemy = enemy_list[0].instance()
 	# Choose a spawn location
 	enemy.position = spawn_location.position
 	

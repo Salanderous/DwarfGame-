@@ -35,7 +35,7 @@ func _process(delta):
 		show()
 	if knockback != Vector2(0, 0):
 		position += knockback
-		knockback = .8 * knockback
+		knockback = .9 * knockback
 		if knockback.length() < 5:
 			knockback = Vector2(0, 0)
 		return
