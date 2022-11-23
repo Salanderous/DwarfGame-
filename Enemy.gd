@@ -5,7 +5,7 @@ class_name Enemy
 
 var spawning
 var SPEED = 25
-var KNOCKBACK = 25
+var KNOCKBACK = 13
 
 
 onready var Player = get_node("/root/Player")

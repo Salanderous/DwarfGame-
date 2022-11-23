@@ -4,7 +4,7 @@ signal hit
 
 
 
-export var speed = 400 # How fast the player will move (pixels/sec).
+export var speed = 250 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 const STARTPOSITION = Vector2(200, 200)
 var knockback = Vector2(0, 0)
@@ -26,6 +26,8 @@ func _process(delta):
 		if ((invincibility % 6) == 0):
 			if visible:
 				hide()
+				#If the weapon is swung during invincibility, it shouldn't blink
+				$Weapon.show()
 			else:
 				show()
 		invincibility -= 1
@@ -40,18 +42,27 @@ func _process(delta):
 			knockback = Vector2(0, 0)
 		return
 	var velocity = Vector2.ZERO # The player's movement vector.
+	var moved = false
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
 		emit_signal("charge_weapon")
+		moved = true
 	if Input.is_action_pressed("move_down"):
 		velocity.y += 1
 		emit_signal("charge_weapon")
+		moved = true
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= 1
 		emit_signal("charge_weapon")
+		moved = true
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 		emit_signal("charge_weapon")
+		moved = true
+	if(moved):
+		$Sparks.emitting = true
+	else:
+		$Sparks.emitting = false
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
@@ -64,8 +75,14 @@ func _process(delta):
 	if velocity.x != 0:
 		$AnimatedSprite.animation = "walk"
 		$AnimatedSprite.flip_v = false
-		$AnimatedSprite.flip_h = velocity.x < 0
-
+		if (velocity.x < 0):
+			$AnimatedSprite.flip_h = true
+			$Sparks.position.x = 10
+			$Sparks.direction.x = 1
+		else: 
+			$AnimatedSprite.flip_h = false
+			$Sparks.position.x = -10
+			$Sparks.direction.x = -1
 
 func _on_Enemy_body_entered(body):
 	#TODO: Remove unnecessary parts of this function. On touching an enemy the player should get hit and then become invuncible for a second

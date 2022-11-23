@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/elfwiz2.png-e30d49a36cab95239840b5a5993cd42a.stex"
+path="res://.import/dwarfwalk2.png-abe8f61b43ed6a9857e0d851d24e1d9f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/elfwiz2.png"
-dest_files=[ "res://.import/elfwiz2.png-e30d49a36cab95239840b5a5993cd42a.stex" ]
+source_file="res://art/dwarfwalk2.png"
+dest_files=[ "res://.import/dwarfwalk2.png-abe8f61b43ed6a9857e0d851d24e1d9f.stex" ]
 
 [params]
 
