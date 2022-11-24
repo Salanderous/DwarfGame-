@@ -27,6 +27,7 @@ func _ready():
 	$AnimatedSprite.show()
 	$CollisionShape2D.disabled = false
 	spawning = false
+	$ProjectileTimer.start()
 	
 func die():
 	#print("Enemy died")
@@ -38,7 +39,6 @@ func _process(delta):
 	#Don't do anything if still spawning
 	if (spawning):
 		return
-	#Different enemies will override this with their own projectiles
 	projectileAttack()
 	var collision = move_and_collide(findPlayerVector() * SPEED * delta)
 	if collision:
@@ -55,5 +55,8 @@ func findPlayerVector():
 func setStats():
 	pass
 
+func _on_ProjectileTimer_timeout():
+	pass
+	
 func projectileAttack():
 	pass
