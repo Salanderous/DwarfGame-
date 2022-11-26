@@ -1,6 +1,7 @@
 extends Node2D
 
 var enemy_list = [preload("res://ElfFighter.tscn"), preload("res://ElfMage.tscn")]
+var boss = preload("res://Treant.tscn")
 var score
 var game_duration = 0
 var STAGE_HEIGHT = 500
@@ -21,12 +22,14 @@ func _process(delta):
 	
 func game_over():
 	$ScoreTimer.stop()
+	$BossTimer.stop()
 	$MobTimer.stop()
 	
 	
 func new_game():
 	score = 0
 	$MobTimer.start()
+	$BossTimer.start()
 	$ScoreTimer.start()
 	
 func _on_ScoreTimer_timeout():
@@ -47,6 +50,21 @@ func _on_MobTimer_timeout():
 	var enemy = enemy_list[0].instance()
 	# Choose a spawn location
 	enemy.position = spawn_location.position
-	
 	# Spawn the mob by adding it to the Main scene.
 	add_child(enemy)
+	
+func _on_BossTimer_timeout():
+	#Set the spawn location
+	var spawn_location = get_node("Level/MobPath/MobSpawnLocation")
+	spawn_location.offset = randi()
+	#If it is too close to the player, abort
+	if (Player.position - spawn_location.position).length() < 150:
+		print("Spawn prevented due to proximity")
+		return
+	# Create a new instance of the Enemy scene.
+	var enemy = boss.instance()
+	# Choose a spawn location
+	enemy.position = spawn_location.position
+	# Spawn the mob by adding it to the Main scene.
+	add_child(enemy)
+	print("Boss spawned")
