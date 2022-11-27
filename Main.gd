@@ -2,7 +2,7 @@ extends Node2D
 
 var enemy_list = [preload("res://ElfFighter.tscn"), preload("res://ElfMage.tscn")]
 var boss = preload("res://Treant.tscn")
-var score
+var score = 0
 var game_duration = 0
 var STAGE_HEIGHT = 500
 var STAGE_LENGTH = 500
@@ -18,6 +18,8 @@ func _ready():
 
 func _process(delta):
 	game_duration += 1
+	score += 1
+	$HUD/Control/Score.text = str(score)
 	
 	
 func game_over():

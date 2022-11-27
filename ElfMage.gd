@@ -5,6 +5,7 @@ var projectileCount = 100
 
 func setStats():
 	SPEED = 0
+	$AnimatedSprite.animation = "ElfMage"
 	
 func projectileAttack():
 	if (projectileCount > 0):

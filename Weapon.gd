@@ -24,7 +24,7 @@ func _process(delta):
 		physics_lock = true
 		show()
 		check_weapon_targets()
-		yield(get_tree().create_timer(1.0), "timeout")
+		yield(get_tree().create_timer(0.2), "timeout")
 		hide()
 		physics_lock = false
 

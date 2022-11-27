@@ -7,6 +7,10 @@ const WALL_SPREAD = 10
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SPEED = 10
+	$AnimatedSprite.animation = "TreeNew"
+	yield(get_tree().create_timer(3.0), "timeout")
+	$CollisionShape2D.disabled = true
+	$CollisionShape2D2.disabled = false
 
 
 func projectileAttack():
@@ -80,3 +84,16 @@ func projectileAttack():
 	get_node("/root/Main").add_child(projectile5)
 	projectileCount = 120
 	return
+	
+func die():
+	if ($AnimatedSprite.animation == "TreeNew"):
+		$AnimatedSprite.animation = "TreeDamaged"
+		return
+	if ($AnimatedSprite.animation == "TreeDamaged"):
+		$AnimatedSprite.animation = "TreeDying"
+		return
+	if ($AnimatedSprite.animation == "TreeDying"):
+		hide()
+		queue_free()
+		Main.score += 1000
+		return

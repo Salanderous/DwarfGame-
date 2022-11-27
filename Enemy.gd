@@ -10,6 +10,7 @@ var KNOCKBACK = 13
 
 onready var Player = get_node("/root/Player")
 onready var HealthBar = get_node("/root/Main/HUD/Control/HealthBar")
+onready var Main = get_node("/root/Main")
 
 
 func _ready():
@@ -21,8 +22,7 @@ func _ready():
 	$AnimatedSprite.hide()
 	$SpawnParticles.emitting = true
 	$SpawnParticles.show()
-	$AnimatedSprite.playing = true
-	$AnimatedSprite.animation = get_class()
+	$AnimatedSprite.playing = true	
 	yield(get_tree().create_timer(3.0), "timeout")
 	$AnimatedSprite.show()
 	$CollisionShape2D.disabled = false
@@ -30,9 +30,10 @@ func _ready():
 	$ProjectileTimer.start()
 	
 func die():
-	#print("Enemy died")
 	hide()
 	queue_free()
+	Main.score += 100
+	return
 
 
 func _process(delta):
