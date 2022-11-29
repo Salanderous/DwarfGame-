@@ -1,8 +1,8 @@
 extends Area2D
 signal weapon_swing
 
-const MAX_CHARGE = 1.3
-const MIN_CHARGE = 0.3
+const MAX_CHARGE = 1.2
+const MIN_CHARGE = 0.5
 const CHARGE_RATE = 0.005
 
 var weapon_charge = 0
@@ -12,7 +12,8 @@ onready var WeaponCharge = get_node("/root/Main/HUD/Control/Weapon Charge")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	hide()
+	show()
+	$AnimatedSprite.hide()
 	return
 
 
@@ -20,7 +21,7 @@ func _ready():
 func _process(delta):
 	if($AnimatedSprite.frame == 0):
 		$AnimatedSprite.playing = false
-		hide()
+		$AnimatedSprite.hide()
 		physics_lock = false
 	if (!physics_lock):
 		rotation = find_weapon_rotation()
@@ -36,7 +37,7 @@ func _process(delta):
 		physics_lock = true
 		$AnimatedSprite.playing = true
 		$AnimatedSprite.frame = 1
-		show()
+		$AnimatedSprite.show()
 		check_weapon_targets()
 	return
 
@@ -57,5 +58,8 @@ func check_weapon_targets():
 func _on_Player_charge_weapon():
 	if (weapon_charge < MAX_CHARGE):
 		weapon_charge += CHARGE_RATE
+	else:
+		pass
+		#Player.fullCharge.emitting = true
 	WeaponCharge.set_text(str(weapon_charge))
 	return

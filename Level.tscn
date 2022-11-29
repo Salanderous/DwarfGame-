@@ -4,10 +4,13 @@
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -128, -128, 0, 0, 0, 0, 128, -128, 0, 0, 0, 0, 128, 128, 0, 0, 0, 0, -128, 128, 0, 0, 0, 0, -128, -128 )
+"points": PoolVector2Array( 0, 0, 0, 0, -176, -176, 0, 0, 0, 0, 176, -176, 0, 0, 0, 0, 176, 176, 0, 0, 0, 0, -176, 176, 0, 0, 0, 0, -176, -176, 0, 0, 0, 0, -176, -176 )
 }
 
 [node name="Level" type="StaticBody2D"]
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 build_mode = 1
@@ -22,4 +25,4 @@ texture = ExtResource( 1 )
 curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
-position = Vector2( -128, -128 )
+position = Vector2( -176, -176 )

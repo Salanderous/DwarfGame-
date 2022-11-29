@@ -12,6 +12,9 @@ var knockback = Vector2(0, 0)
 var invincibility = 0
 var dodge_cooldown = 0
 var dodgeVelocity = Vector2(0, 0)
+var dead = false
+
+onready var HealthBar = get_node("/root/Main/HUD/Control/HealthBar")
 
 #When the main menu is made, move this to start()
 func _ready():
@@ -21,10 +24,24 @@ func _ready():
 	
 	
 func start(pos):
-	pass
+	return
+	
+func restart():
+	position = STARTPOSITION
+	HealthBar.frame = 0
+	return
 
 
 func _process(delta):
+	if (HealthBar.frame == 3):
+		dead = true
+		$CollisionShape2D.disabled = true
+		$AnimatedSprite.hide()
+		$DeathParticles.emitting = true
+		$DeathParticles.show()
+		return
+	if (dead):
+		return
 	if (dodge_cooldown > 0):
 		dodge_cooldown -= 1
 	if invincibility > 0:
