@@ -54,7 +54,8 @@ zoom = Vector2( 0.5, 0.5 )
 
 [node name="Sparks" type="CPUParticles2D" parent="."]
 position = Vector2( -10, 15 )
-amount = 7
+emitting = false
+amount = 12
 lifetime = 1.5
 randomness = 0.19
 lifetime_randomness = 0.46

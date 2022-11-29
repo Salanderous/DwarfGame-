@@ -84,7 +84,7 @@ func _process(delta):
 	else:
 		$AnimatedSprite.stop()
 		
-	position += velocity * delta
+	move_and_collide(velocity * delta)
 	
 	if velocity.x != 0:
 		$AnimatedSprite.animation = "walk"
