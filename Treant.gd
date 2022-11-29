@@ -93,7 +93,6 @@ func die():
 		$AnimatedSprite.animation = "TreeDying"
 		return
 	if ($AnimatedSprite.animation == "TreeDying"):
-		hide()
-		queue_free()
-		Main.score += 1000
+		Main.score += 900
+		.die()
 		return

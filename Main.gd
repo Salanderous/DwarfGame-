@@ -43,9 +43,9 @@ func _on_MobTimer_timeout():
 	var spawn_location = get_node("Level/MobPath/MobSpawnLocation")
 	spawn_location.offset = randi()
 	#If it is too close to the player, abort
-	if (Player.position - spawn_location.position).length() < 150:
-		print("Spawn prevented due to proximity")
-		return
+	#if (Player.position - spawn_location.position).length() < 150:
+		#print("Spawn prevented due to proximity")
+		#return
 	# Create a new instance of the Enemy scene.
 	#The enemy object will handle its own movement
 	enemy_list.shuffle()
@@ -54,19 +54,24 @@ func _on_MobTimer_timeout():
 	enemy.position = spawn_location.position
 	# Spawn the mob by adding it to the Main scene.
 	add_child(enemy)
+	#Increase the spawn rate
+	if ($MobTimer.wait_time > 0.5):
+		$MobTimer.wait_time = $MobTimer.wait_time * 0.95
 	
 func _on_BossTimer_timeout():
 	#Set the spawn location
 	var spawn_location = get_node("Level/MobPath/MobSpawnLocation")
 	spawn_location.offset = randi()
 	#If it is too close to the player, abort
-	if (Player.position - spawn_location.position).length() < 150:
-		print("Spawn prevented due to proximity")
-		return
+	#if (Player.position - spawn_location.position).length() < 150:
+		#print("Spawn prevented due to proximity")
+		#return
 	# Create a new instance of the Enemy scene.
 	var enemy = boss.instance()
 	# Choose a spawn location
 	enemy.position = spawn_location.position
 	# Spawn the mob by adding it to the Main scene.
 	add_child(enemy)
-	print("Boss spawned")
+	#Increase the spawn rate
+	if ($BossTimer.wait_time > 2.5):
+		$BossTimer.wait_time = $BossTimer.wait_time * 0.95

@@ -34,6 +34,9 @@ colors = PoolColorArray( 0.9375, 0.862154, 0.0732422, 1, 0.698039, 0.698039, 0.6
 position = Vector2( -1, 0 )
 collision_mask = 3
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
@@ -47,7 +50,7 @@ shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.6, 0.6 )
+zoom = Vector2( 0.5, 0.5 )
 
 [node name="Sparks" type="CPUParticles2D" parent="."]
 position = Vector2( -10, 15 )

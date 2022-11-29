@@ -28,7 +28,7 @@ func _process(delta):
 	if (dodge_cooldown > 0):
 		dodge_cooldown -= 1
 	if invincibility > 0:
-		if ((invincibility % 6) == 0):
+		if ((invincibility % 8) == 0):
 			if visible:
 				hide()
 			else:
@@ -118,3 +118,4 @@ func invincibility():
 	
 func dodge(dodgeVector):
 	dodgeVelocity = dodgeVector * DODGE_SPEED
+	dodge_cooldown = 30

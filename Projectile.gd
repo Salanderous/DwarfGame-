@@ -23,6 +23,8 @@ func _process(delta):
 				Player.invincibility = 60
 				HealthBar.frame += 1
 				_on_Lifetime_timeout()
+		if collision.collider.name == "Level":
+			_on_Lifetime_timeout()
 	
 func _on_Lifetime_timeout():
 	hide()

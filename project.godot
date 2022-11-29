@@ -28,6 +28,11 @@ config/icon="res://icon.png"
 
 Player="*res://Player.tscn"
 
+[display]
+
+window/size/width=1000
+window/size/height=1000
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

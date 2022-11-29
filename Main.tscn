@@ -23,6 +23,7 @@ script = ExtResource( 3 )
 [node name="MobTimer" type="Timer" parent="."]
 
 [node name="BossTimer" type="Timer" parent="."]
+wait_time = 5.0
 
 [node name="ScoreTimer" type="Timer" parent="."]
 

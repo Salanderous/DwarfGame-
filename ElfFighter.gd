@@ -2,7 +2,7 @@ extends Enemy
 
 
 func setStats():
-	SPEED = 40
+	SPEED = 80
 	$AnimatedSprite.animation = "ElfFighter"
 	
 #Fighter has no projectile attack
