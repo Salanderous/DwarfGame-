@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Weapon.gd" type="Script" id=1]
 [ext_resource path="res://art/SWOOSH5.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://art/SWOOSH3.png" type="Texture" id=7]
 [ext_resource path="res://sound/swing.wav" type="AudioStream" id=8]
 [ext_resource path="res://sound/fullCharge.wav" type="AudioStream" id=9]
+[ext_resource path="res://art/trackerbeam1.png" type="Texture" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -39,3 +40,10 @@ bus = "SFX"
 [node name="FullCharge" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 bus = "SFX"
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.266667 )
+position = Vector2( 0.532133, -124.803 )
+rotation = -0.785398
+scale = Vector2( 1.4567, 1.44932 )
+texture = ExtResource( 10 )

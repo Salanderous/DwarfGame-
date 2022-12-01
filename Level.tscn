@@ -271,4 +271,4 @@ scale = Vector2( 1.33333, 1.16111 )
 curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
-position = Vector2( -144, -144 )
+position = Vector2( -168, -171.56 )

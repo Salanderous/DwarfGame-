@@ -19,11 +19,12 @@ animations = [ {
 } ]
 
 [sub_resource type="DynamicFont" id=4]
-size = 40
+size = 48
 font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=5]
-size = 40
+size = 48
+extra_spacing_top = -8
 font_data = ExtResource( 9 )
 
 [sub_resource type="Gradient" id=2]

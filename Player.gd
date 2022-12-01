@@ -7,7 +7,7 @@ signal hit
 export var speed = 250 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 const STARTPOSITION = Vector2(0, 0)
-const DODGE_SPEED = 8
+const DODGE_SPEED = 10
 var knockback = Vector2(0, 0)
 var invincibility = 0
 var dodge_cooldown = 0
