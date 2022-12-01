@@ -14,12 +14,14 @@ onready var Player = get_node("/root/Player")
 func _ready():
 	randomize()
 	new_game()
+	$HUD/Control/Endscore.visible = false
 
 
 func _process(delta):
 	game_duration += 1
 	score += 1
 	$HUD/Control/Score.text = str(score)
+	$HUD/Control/Endscore.text = str(score)
 	
 	
 func game_over():
@@ -74,3 +76,7 @@ func _on_BossTimer_timeout():
 	#Increase the spawn rate
 	if ($BossTimer.wait_time > 2.5):
 		$BossTimer.wait_time = $BossTimer.wait_time * 0.95
+
+
+func _on_Button_button_down():
+	get_tree().reload_current_scene()

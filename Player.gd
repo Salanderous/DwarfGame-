@@ -15,6 +15,8 @@ var dodgeVelocity = Vector2(0, 0)
 var dead = false
 
 onready var HealthBar = get_node("/root/Main/HUD/Control/HealthBar")
+onready var ReloadButton = get_node("/root/Main/HUD/Control/Button")
+onready var EndScore = get_node("/root/Main/HUD/Control/Endscore")
 
 #When the main menu is made, move this to start()
 func _ready():
@@ -23,6 +25,7 @@ func _ready():
 	$Sparks.emitting = false
 	show()
 	$CollisionShape2D.disabled = false
+	ReloadButton.visible = false
 
 
 func start(pos):
@@ -36,6 +39,8 @@ func _process(delta):
 		$AnimatedSprite.hide()
 		$DeathParticles.emitting = true
 		$DeathParticles.show()
+		ReloadButton.visible = true
+		EndScore.visible = true
 		return
 	if (dead):
 		return

@@ -59,6 +59,20 @@ frames = SubResource( 1 )
 margin_right = 40.0
 margin_bottom = 14.0
 
+[node name="Endscore" type="Label" parent="HUD/Control"]
+margin_left = 323.0
+margin_top = 279.0
+margin_right = 363.0
+margin_bottom = 293.0
+text = "Score:"
+
+[node name="Button" type="Button" parent="HUD/Control"]
+margin_left = 286.0
+margin_top = 318.0
+margin_right = 406.0
+margin_bottom = 380.0
+text = "Restart"
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 autoplay = true
@@ -66,3 +80,4 @@ bus = "Music"
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="BossTimer" to="." method="_on_BossTimer_timeout"]
+[connection signal="button_down" from="HUD/Control/Button" to="." method="_on_Button_button_down"]
