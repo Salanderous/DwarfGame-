@@ -23,16 +23,16 @@ func _process(delta):
 	
 	
 func game_over():
-	$ScoreTimer.stop()
 	$BossTimer.stop()
 	$MobTimer.stop()
+	
 	
 	
 func new_game():
 	score = 0
 	$MobTimer.start()
 	$BossTimer.start()
-	$ScoreTimer.start()
+	Player._ready()
 	
 func _on_ScoreTimer_timeout():
 	score += 1
@@ -42,14 +42,17 @@ func _on_MobTimer_timeout():
 	#Set the spawn location
 	var spawn_location = get_node("Level/MobPath/MobSpawnLocation")
 	spawn_location.offset = randi()
-	#If it is too close to the player, abort
-	#if (Player.position - spawn_location.position).length() < 150:
-		#print("Spawn prevented due to proximity")
-		#return
 	# Create a new instance of the Enemy scene.
-	#The enemy object will handle its own movement
 	enemy_list.shuffle()
 	var enemy = enemy_list[0].instance()
+	#If there are too many enemies, abort
+	var enemyCount = 0
+	for thing in self.get_children():
+		if (thing.get_class() == enemy.get_class()):
+			enemyCount += 1
+	if (enemyCount > 20):
+		print("max enemies")
+		return
 	# Choose a spawn location
 	enemy.position = spawn_location.position
 	# Spawn the mob by adding it to the Main scene.
@@ -62,10 +65,6 @@ func _on_BossTimer_timeout():
 	#Set the spawn location
 	var spawn_location = get_node("Level/MobPath/MobSpawnLocation")
 	spawn_location.offset = randi()
-	#If it is too close to the player, abort
-	#if (Player.position - spawn_location.position).length() < 150:
-		#print("Spawn prevented due to proximity")
-		#return
 	# Create a new instance of the Enemy scene.
 	var enemy = boss.instance()
 	# Choose a spawn location

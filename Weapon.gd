@@ -1,12 +1,13 @@
 extends Area2D
 signal weapon_swing
 
-const MAX_CHARGE = 1.2
+const MAX_CHARGE = 1.0
 const MIN_CHARGE = 0.5
 const CHARGE_RATE = 0.005
 
 var weapon_charge = 0
 var physics_lock = false
+var playChargeSound = true
 
 onready var WeaponCharge = get_node("/root/Main/HUD/Control/Weapon Charge")
 
@@ -22,6 +23,7 @@ func _process(delta):
 	if($AnimatedSprite.frame == 0):
 		$AnimatedSprite.playing = false
 		$AnimatedSprite.hide()
+		$Swing.playing = false
 		physics_lock = false
 	if (!physics_lock):
 		rotation = find_weapon_rotation()
@@ -31,6 +33,8 @@ func _process(delta):
 			scale = Vector2(MIN_CHARGE, MIN_CHARGE)
 	if Input.is_action_just_pressed("left_click") and physics_lock == false:
 		weapon_charge = 0
+		$Swing.playing = true
+		playChargeSound = true
 		WeaponCharge.set_text(str(0))
 		emit_signal("weapon_swing")
 		#print("Left Click")
@@ -59,7 +63,8 @@ func _on_Player_charge_weapon():
 	if (weapon_charge < MAX_CHARGE):
 		weapon_charge += CHARGE_RATE
 	else:
-		pass
-		#Player.fullCharge.emitting = true
+		if (playChargeSound == true):
+			$FullCharge.playing = true
+			playChargeSound = false
 	WeaponCharge.set_text(str(weapon_charge))
 	return

@@ -19,16 +19,13 @@ onready var HealthBar = get_node("/root/Main/HUD/Control/HealthBar")
 #When the main menu is made, move this to start()
 func _ready():
 	position = STARTPOSITION
+	HealthBar.frame = 0
+	$Sparks.emitting = false
 	show()
 	$CollisionShape2D.disabled = false
-	
-	
+
+
 func start(pos):
-	return
-	
-func restart():
-	position = STARTPOSITION
-	HealthBar.frame = 0
 	return
 
 
@@ -46,14 +43,14 @@ func _process(delta):
 		dodge_cooldown -= 1
 	if invincibility > 0:
 		if ((invincibility % 8) == 0):
-			if visible:
-				hide()
+			if $AnimatedSprite.visible:
+				$AnimatedSprite.hide()
 			else:
-				show()
+				$AnimatedSprite.show()
 		invincibility -= 1
 	#Just to make sure the player never gets stuck as hidden because of getting hit. 
 	if invincibility == 0:
-		show()
+		$AnimatedSprite.show()
 	if knockback != Vector2(0, 0):
 		position += knockback
 		knockback = .9 * knockback
@@ -130,8 +127,10 @@ func get_position():
 	
 func invincibility():
 	$CollisionShape2D.set("disabled", true)
+	set_collision_layer_bit(1, false)
 	yield(get_tree().create_timer(1.0), "timeout")
 	$CollisionShape2D.set("disabled", false)
+	set_collision_layer_bit(1, true)
 	
 func dodge(dodgeVector):
 	dodgeVelocity = dodgeVector * DODGE_SPEED

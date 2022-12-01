@@ -6,6 +6,7 @@ var SPEED = 60
 var KNOCKBACK = 10
 
 onready var Player = get_node("/root/Player")
+onready var Hurt = get_node("/root/Player/Hurt")
 onready var HealthBar = get_node("/root/Main/HUD/Control/HealthBar")
 
 # Called when the node enters the scene tree for the first time.
@@ -22,6 +23,7 @@ func _process(delta):
 				Player.knockback += direction * KNOCKBACK
 				Player.invincibility = 60
 				HealthBar.frame += 1
+				Hurt.playing = true
 				_on_Lifetime_timeout()
 		if collision.collider.name == "Level":
 			_on_Lifetime_timeout()

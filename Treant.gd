@@ -94,5 +94,6 @@ func die():
 		return
 	if ($AnimatedSprite.animation == "TreeDying"):
 		Main.score += 900
+		$CollisionShape2D2.disabled = true
 		.die()
 		return

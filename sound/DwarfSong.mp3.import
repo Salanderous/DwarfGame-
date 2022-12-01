@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DwarfSong.mp3-e86b78b073e867b64b53a36e15ca5358.mp3str"
+
+[deps]
+
+source_file="res://sound/DwarfSong.mp3"
+dest_files=[ "res://.import/DwarfSong.mp3-e86b78b073e867b64b53a36e15ca5358.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

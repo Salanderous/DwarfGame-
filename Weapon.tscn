@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Weapon.gd" type="Script" id=1]
 [ext_resource path="res://art/SWOOSH5.png" type="Texture" id=2]
@@ -7,10 +7,12 @@
 [ext_resource path="res://art/SWOOSH2.png" type="Texture" id=5]
 [ext_resource path="res://art/SWOOSH4.png" type="Texture" id=6]
 [ext_resource path="res://art/SWOOSH3.png" type="Texture" id=7]
+[ext_resource path="res://sound/swing.wav" type="AudioStream" id=8]
+[ext_resource path="res://sound/fullCharge.wav" type="AudioStream" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "default",
 "speed": 30.0
@@ -19,17 +21,21 @@ animations = [ {
 [node name="Weapon" type="Area2D"]
 collision_mask = 7
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -8, -120 )
-rotation = -0.383972
-scale = Vector2( 0.75, 1.75994 )
+position = Vector2( -8.32187, -127.953 )
+rotation = -0.753982
+scale = Vector2( 1.37324, 1.60062 )
 frames = SubResource( 1 )
-frame = 5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( -304, 72 )
-polygon = PoolVector2Array( 304, -64, 232, -264, 376, -264 )
+polygon = PoolVector2Array( 304, -64, 208, -264, 400, -264 )
+
+[node name="Swing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+bus = "SFX"
+
+[node name="FullCharge" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+bus = "SFX"
