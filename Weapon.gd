@@ -2,17 +2,19 @@ extends Area2D
 signal weapon_swing
 
 const MAX_CHARGE = 1.0
-const MIN_CHARGE = 0.5
-const CHARGE_RATE = 0.005
+const MIN_CHARGE = 0.25
+const CHARGE_RATE = 0.008
 
 var weapon_charge = 0
 var physics_lock = false
 var playChargeSound = true
-
-onready var WeaponCharge = get_node("/root/Main/HUD/Control/Weapon Charge")
+var WeaponCharge
+var spawnFrame
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	spawnFrame = true
+	WeaponCharge = get_node("/root/Main/HUD/Control/Weapon Charge")
 	show()
 	$AnimatedSprite.hide()
 	return
@@ -20,6 +22,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if (spawnFrame):
+		spawnFrame = false
+		return
 	if($AnimatedSprite.frame == 0):
 		$AnimatedSprite.playing = false
 		$AnimatedSprite.hide()
@@ -31,7 +36,7 @@ func _process(delta):
 			scale = Vector2(weapon_charge, weapon_charge)
 		else:
 			scale = Vector2(MIN_CHARGE, MIN_CHARGE)
-	if Input.is_action_just_pressed("left_click") and physics_lock == false:
+	if Input.is_action_just_pressed("left_click") and physics_lock == false and get_parent().dead == false:
 		weapon_charge = 0
 		$Swing.playing = true
 		playChargeSound = true
@@ -55,7 +60,6 @@ func check_weapon_targets():
 		if thing.has_method("die"):
 			thing.die()
 		if thing.has_method("_on_Lifetime_timeout"):
-			print("Projectile detected")
 			thing._on_Lifetime_timeout()
 	return
 

@@ -6,13 +6,14 @@ signal hit
 
 export var speed = 250 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
-const STARTPOSITION = Vector2(200, 200)
+const STARTPOSITION = Vector2(0, 0)
 const DODGE_SPEED = 8
 var knockback = Vector2(0, 0)
 var invincibility = 0
 var dodge_cooldown = 0
 var dodgeVelocity = Vector2(0, 0)
 var dead = false
+var spawnframe
 
 onready var HealthBar = get_node("/root/Main/HUD/Control/HealthBar")
 onready var ReloadButton = get_node("/root/Main/HUD/Control/Button")
@@ -20,12 +21,20 @@ onready var EndScore = get_node("/root/Main/HUD/Control/Endscore")
 
 #When the main menu is made, move this to start()
 func _ready():
+	knockback = Vector2(0, 0)
+	invincibility = 0
+	dodge_cooldown = 0
+	dodgeVelocity = Vector2(0, 0)
+	$Weapon._ready()
+	dead = false
 	position = STARTPOSITION
 	HealthBar.frame = 0
 	$Sparks.emitting = false
-	show()
+	$DeathParticles.emitting = false
+	$DeathParticles.hide()
 	$CollisionShape2D.disabled = false
 	ReloadButton.visible = false
+	show()
 
 
 func start(pos):
@@ -34,6 +43,7 @@ func start(pos):
 
 func _process(delta):
 	if (HealthBar.frame == 3):
+		AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("Music"), 0, true)
 		dead = true
 		$CollisionShape2D.disabled = true
 		$AnimatedSprite.hide()
@@ -57,7 +67,7 @@ func _process(delta):
 	if invincibility == 0:
 		$AnimatedSprite.show()
 	if knockback != Vector2(0, 0):
-		position += knockback
+		move_and_collide(knockback)
 		knockback = .9 * knockback
 		if knockback.length() < 5:
 			knockback = Vector2(0, 0)

@@ -68,3 +68,6 @@ func _on_ProjectileTimer_timeout():
 	
 func projectileAttack():
 	pass
+	
+func get_class():
+	return "Enemy"

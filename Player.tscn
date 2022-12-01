@@ -11,7 +11,7 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ null, null ],
+"frames": [  ],
 "loop": true,
 "name": "default",
 "speed": 5.0
